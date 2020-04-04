@@ -8,13 +8,12 @@ using std::string;
 
 TopTenList::TopTenList()
 {
-	_list.resize(10);
+	_list.resize(11);
 }
 
 void TopTenList::set_at(int index, Hyperlink link)
 {	
-	_list.resize(10); // Prevents vector from expanding on every insert
-	_list.insert(_list.begin()+index, link);
+	_list[index-1] = link;
 }
 
 Hyperlink TopTenList::get(int index)
@@ -24,14 +23,15 @@ Hyperlink TopTenList::get(int index)
 
 void TopTenList::display_forward(){
 	
-	for (int i=1;i<_list.size();i++){
-		std::cout << i << ": <a href=\"" << _list[i].url << "\">";
+	for (int i=0;i<_list.size()-1;i++){
+		std::cout << i+1 << ": <a href=\"" << _list[i].url << "\">";
 		std::cout << _list[i].text << "</a>" << std::endl;
 	}
 }
 void TopTenList::display_backward(){
 	
-	for (int i=_list.size()-1;i>0;i--){
-		std::cout << i+1 <<": " << _list[i].text << std::endl;
+	for (int i=_list.size()-2;i>=0;i--){
+		std::cout << i+ 1<< ": <a href=\"" << _list[i].url << "\">";
+		std::cout << _list[i].text << "</a>" << std::endl;
 	}
 }
